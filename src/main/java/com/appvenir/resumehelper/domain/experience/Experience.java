@@ -1,7 +1,9 @@
-package com.appvenir.resumehelper.domain.resumeBuilder;
+package com.appvenir.resumehelper.domain.experience;
 
 import java.time.LocalDate;
 
+import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilder;
+import com.appvenir.resumehelper.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -35,6 +37,11 @@ public class Experience {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

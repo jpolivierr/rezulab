@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.appvenir.resumehelper.domain.common.Auditable;
+import com.appvenir.resumehelper.domain.experience.Experience;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

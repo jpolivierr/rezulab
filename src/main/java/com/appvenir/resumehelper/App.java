@@ -7,8 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.appvenir.resumehelper.domain.experience.Experience;
+import com.appvenir.resumehelper.domain.experience.dto.ExperienceDto;
 import com.appvenir.resumehelper.domain.prompt.Prompt;
-import com.appvenir.resumehelper.domain.resumeBuilder.Experience;
 import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilder;
 import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilderService;
 import com.appvenir.resumehelper.domain.user.UserService;
@@ -26,15 +27,26 @@ public class App{
     public CommandLineRunner commandLineRunner(UserService userService, ResumeBuilderService resumeBuilderService) {
         return args -> {
 
-			var experience = new Experience();
-			experience.setCompany("ReminderMedia");
-			experience.setJobTitle("Software Engineer");
+			var user = new UserDto();
+			user.setName("Frederic Olivier");
+			user.setEmail("jp@gmail.com");
+
+			// userService.saveUser(user);
+
+			var experience = new ExperienceDto();
+			experience.setCompany("Vultr");
+			experience.setJobTitle("IT");
 			experience.setJobDescription("Build software");
 			experience.setStartDate(LocalDate.of(2021, 3, 26));
 			experience.setEndDate(LocalDate.of(2024, 7, 22));
 
-			var resumeBuilder = new ResumeBuilder();
-	        resumeBuilder.setJobDescription("this job is for software engineers that works hard");
+			//  userService.addExperience(user, experience);
+			//  userService.removeExperiencese(user, Long.valueOf(1));
+			// userService.updateExperience(user, Long.valueOf(2), experience);
+
+			// var resumeBuilder = new ResumeBuilder();
+	        // resumeBuilder.setJobDescription("this job is for software engineers that works hard");
+			// resumeBuilder.addExperience(experience);
 			// resumeBuilder.removeExperience(experience);
 
 			//  var savedResumeBuilder = resumeBuilderService.saveResumeBuilder(resumeBuilder);
