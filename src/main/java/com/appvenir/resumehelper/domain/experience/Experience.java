@@ -1,6 +1,7 @@
 package com.appvenir.resumehelper.domain.experience;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilder;
 import com.appvenir.resumehelper.domain.user.User;
@@ -13,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
@@ -44,7 +46,6 @@ public class Experience {
     private User user;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resumeBuilder_id")
-    private ResumeBuilder resumeBuilder;
+    @ManyToMany(mappedBy = "experiences")
+    private Set<ResumeBuilder> resumeBuilders;
 }

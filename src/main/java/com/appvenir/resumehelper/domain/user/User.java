@@ -5,6 +5,8 @@ import java.util.Set;
 import com.appvenir.resumehelper.domain.common.Auditable;
 import com.appvenir.resumehelper.domain.experience.Experience;
 import com.appvenir.resumehelper.domain.experience.dto.ExperienceDto;
+import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilder;
+import com.appvenir.resumehelper.domain.resumeBuilder.dto.ResumeBuilderDto;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,6 +33,9 @@ public class User extends Auditable{
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ResumeBuilder> resumeBuilders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Experience> experiences;
@@ -67,6 +72,35 @@ public class User extends Auditable{
         experience.setStartDate(newExperienceDto.getStartDate());
         experience.setEndDate(newExperienceDto.getEndDate());
     }
+
+    public void addResumeBuilder(ResumeBuilder resumeBuilder){
+        resumeBuilders.add(resumeBuilder);
+        resumeBuilder.setUser(this);
+    }
+
+
+    public void removeResumeBuilder(Long id){
+        resumeBuilders.removeIf( resumeBuilder -> {
+            if(resumeBuilder.getId().equals(id)){
+                resumeBuilder.setUser(null);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    public void updateResumeBuilder(Long id, ResumeBuilderDto newResumeBuilderDto){
+
+        ResumeBuilder resumeBuilder = resumeBuilders.stream()
+                    .filter( r -> r.getId().equals(id))
+                    .findFirst()
+                    .orElseThrow(() -> new EntityNotFoundException("A resume builder was not found"));
+
+        resumeBuilder.setJobDescription(newResumeBuilderDto.getJobDescription());
+        resumeBuilder.setExperiences(newResumeBuilderDto.getExperiences());
+
+    }
+
     
 
 }

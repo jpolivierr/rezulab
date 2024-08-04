@@ -25,6 +25,10 @@ public class UserService {
         return userMapper.toDto(userRepository.save(user));
     }
 
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
+
     public User findUserByEmail(String email){
         return userRepository.findByEmail(email)
                         .orElseThrow(() -> new EntityNotFoundException("A user was not found"));
