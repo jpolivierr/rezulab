@@ -1,29 +1,25 @@
-package com.appvenir.resumehelper.domain.experience;
+package com.appvenir.resumehelper.domain.experience.model;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.appvenir.resumehelper.domain.resumeBuilder.ResumeBuilder;
-import com.appvenir.resumehelper.domain.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.appvenir.resumehelper.domain.common.Auditable;
+import com.appvenir.resumehelper.domain.resumeTemplate.model.ResumeTemplate;
+import com.appvenir.resumehelper.domain.user.model.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-public class Experience {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@EqualsAndHashCode(callSuper=false)
+public class Experience extends Auditable{
 
     @Column(name = "company", nullable = false)
     private String company;
@@ -40,12 +36,8 @@ public class Experience {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "experiences")
-    private Set<ResumeBuilder> resumeBuilders;
 }
