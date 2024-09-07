@@ -9,21 +9,33 @@ import com.appvenir.resumehelper.domain.user.model.User;
 @Mapper(componentModel = "spring")
 public interface PromptMapper {
 
-    Prompt toEntity(PromptDto promptDto);
-
     default Prompt toEntityWithUser(User user, PromptDto promptDto)
     {
         Prompt prompt = new Prompt();
         prompt.setName(promptDto.getName());
         prompt.setContext(promptDto.getContext());
-        prompt.setInstructions(promptDto.getInstructions());
-        prompt.setConstraints(promptDto.getConstraints());
+        prompt.setInstructions(String.join(", ", promptDto.getInstructions()));
+        prompt.setConstraints(String.join(", ",promptDto.getConstraints()));
         prompt.setScope(promptDto.getScope());
         prompt.setAudience(promptDto.getAudience());
         prompt.setExamples(promptDto.getExamples());
         prompt.setUserId(user.getId());
         return prompt;
     }
-    PromptDto toDto(Prompt prompt);
+
+    default PromptDto toDto(Prompt prompt)
+    {
+        PromptDto promptDto = new PromptDto();
+        promptDto.setId(prompt.getId());
+        promptDto.setName(prompt.getName());
+        promptDto.setContext(prompt.getContext());
+        promptDto.setStringInstructions(prompt.getInstructions());
+        promptDto.setStringConstraints(prompt.getConstraints());
+        promptDto.setScope(prompt.getScope());
+        promptDto.setAudience(prompt.getAudience());
+        promptDto.setExamples(prompt.getExamples());
+        return promptDto;
+
+    }
     
 }

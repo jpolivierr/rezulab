@@ -78,8 +78,8 @@ public class PromptService {
         }  
         prompt.setName(promptDto.getName());
         prompt.setContext(promptDto.getContext());
-        prompt.setInstructions(promptDto.getInstructions());
-        prompt.setConstraints(promptDto.getConstraints());
+        prompt.setInstructions(promptDto.getInstructionsAsStrings());
+        prompt.setConstraints(promptDto.getConstraintsAsStrings());
         prompt.setScope(promptDto.getScope());
         prompt.setAudience(promptDto.getAudience());
         prompt.setExamples(promptDto.getExamples());

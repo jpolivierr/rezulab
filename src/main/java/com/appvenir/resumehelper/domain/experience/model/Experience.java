@@ -1,24 +1,25 @@
 package com.appvenir.resumehelper.domain.experience.model;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import com.appvenir.resumehelper.domain.common.Auditable;
-import com.appvenir.resumehelper.domain.resumeTemplate.model.ResumeTemplate;
 import com.appvenir.resumehelper.domain.user.model.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
 @Entity
 @EqualsAndHashCode(callSuper=false)
+@Table(name = "experiences")
+@ToString(exclude = "user")
 public class Experience extends Auditable{
 
     @Column(name = "company", nullable = false)

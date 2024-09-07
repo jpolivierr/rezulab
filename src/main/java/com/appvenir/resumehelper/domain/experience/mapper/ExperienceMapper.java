@@ -15,7 +15,20 @@ public interface ExperienceMapper {
     
     Experience toEntity(ExperienceDto experienceDto); 
 
-    List<ExperienceDto> toDtoList(List<Experience> experiences);
+    default List<ExperienceDto> toDtoList(List<Experience> experiences)
+    {
+        return experiences.stream().map(e -> {
+            ExperienceDto experience = new ExperienceDto();
+            experience.setId(experience.getId());
+            experience.setCompany(e.getCompany());
+            experience.setJobTitle(e.getJobTitle());
+            experience.setJobDescription(e.getJobDescription());
+            experience.setStartDate(e.getStartDate());
+            experience.setEndDate(e.getEndDate());
+            return experience;
+
+        }).toList();
+    }
 
     List<Experience> toEntityList(List<ExperienceDto> experienceDtos);
 

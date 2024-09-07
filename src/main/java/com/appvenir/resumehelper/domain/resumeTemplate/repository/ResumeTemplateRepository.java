@@ -11,5 +11,6 @@ import com.appvenir.resumehelper.domain.user.model.User;
 @Repository
 public interface ResumeTemplateRepository extends JpaRepository<ResumeTemplate, Long> {
     Optional<ResumeTemplate> findByIdAndUser(Long resumeTemplateId, User user);
+    Optional<ResumeTemplate> findByIdAndUserId(Long resumeTemplateId, Long userId);
     Optional<ResumeTemplate> findByNameAndUser(String resumeTemplateName, User user);
 }

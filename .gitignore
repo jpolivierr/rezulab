@@ -32,5 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-resources/assets/
-resources/assets/*
+src/main/resources/assets/

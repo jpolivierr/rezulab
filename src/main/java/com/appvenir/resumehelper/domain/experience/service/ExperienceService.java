@@ -56,6 +56,7 @@ public class ExperienceService {
     {
         User user = userService.findUserByEmail(email);
         List<Experience> experiences = experienceRepository.findAllByUserId(user.getId());
+        System.out.println(experiences);
         return experienceMapper.toDtoList(experiences);
     }
 
