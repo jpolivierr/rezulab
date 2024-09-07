@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.appvenir</groupId>
-	<artifactId>resumehelper</artifactId>
+	<artifactId>rezulab</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>resumehelper</name>
+	<name>rezulab</name>
 	<description>Demo Application</description>
 	<url/>
 	<licenses>
