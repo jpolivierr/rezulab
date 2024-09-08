@@ -1,6 +1,7 @@
 package com.appvenir.resumehelper.domain.resumeTemplate.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.resumehelper.domain.resumeTemplate.dto.ResumeTemplateDto;
 import com.appvenir.resumehelper.domain.resumeTemplate.service.ResumeTemplateService;
+import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,11 +28,12 @@ public class ResumeTemplateController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResumeTemplateDto createResumeTemplate(
+    public ResponseEntity<?> createResumeTemplate(
         @RequestParam("email") String email,
         @RequestBody ResumeTemplateDto resumeTemplateDto
     ){
-        return resumeTemplateService.createResumeTemplate(email, resumeTemplateDto);
+        var resumeTemplate = resumeTemplateService.createResumeTemplate(email, resumeTemplateDto);
+        return ResponseEntity.ok(new ResponseData(resumeTemplate));
     }
 
     @GetMapping("/{resumeTemplateId}")

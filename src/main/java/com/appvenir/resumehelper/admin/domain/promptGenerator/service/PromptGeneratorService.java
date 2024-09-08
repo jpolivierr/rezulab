@@ -44,7 +44,7 @@ public class PromptGeneratorService {
                                         .stream().map((e) -> {
                                             return experienceMapper.toDto(e);
                                         }).toList();
-        
+                                        
         ResumeTemplateDto resumeTemplateDto = resumeTemplateRepository
                                         .findByIdAndUserId(promptDetails.getResumeTemplateId(), userId)
                                         .map(resumeTemplateMapper::toDto)

@@ -13,8 +13,11 @@ public interface ResumeTemplateMapper {
         var resumeTemplateDto = new ResumeTemplateDto();
         resumeTemplateDto.setId(resumeTemplate.getId());
         resumeTemplateDto.setName(resumeTemplate.getName());
+        resumeTemplateDto.setDescription(resumeTemplate.getDescription());
         resumeTemplateDto.setJobDescription(resumeTemplate.getJobDescription());
         resumeTemplate.setSampleResume(resumeTemplate.getSampleResume());
+        resumeTemplate.setDateCreated(resumeTemplate.getDateCreated());
+        resumeTemplate.setDateCreated(resumeTemplate.getDateCreated());
         return resumeTemplateDto;
     }
 
@@ -22,6 +25,7 @@ public interface ResumeTemplateMapper {
     {
         var resumeTemplate = new ResumeTemplate();
         resumeTemplate.setName(resumeTemplateDto.getName());
+        resumeTemplate.setDescription(resumeTemplateDto.getDescription());
         resumeTemplate.setJobDescription(resumeTemplateDto.getJobDescription());
         resumeTemplate.setSampleResume(resumeTemplateDto.getSampleResume());
         return resumeTemplate;
