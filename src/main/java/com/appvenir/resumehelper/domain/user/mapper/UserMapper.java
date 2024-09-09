@@ -1,14 +1,35 @@
 package com.appvenir.resumehelper.domain.user.mapper;
 
-import org.mapstruct.Mapper;
-
 import com.appvenir.resumehelper.domain.user.dto.UserDto;
 import com.appvenir.resumehelper.domain.user.dto.UserRegistrationDto;
 import com.appvenir.resumehelper.domain.user.model.User;
 
-@Mapper(componentModel = "spring")
-public interface UserMapper {
-    UserDto toDto(User user);
-    User toEntity(UserDto userDto);
-    User toEntity(UserRegistrationDto userDto);
+public class UserMapper {
+
+    public static UserDto toDto(User user)
+    {
+        UserDto userDto = new UserDto();
+        userDto.setFullName(user.getFullName());
+        userDto.setEmail(user.getEmail());
+        userDto.setDateCreated(user.getDateCreated());
+        userDto.setLastUpdated(user.getLastUpdated());
+        return userDto;
+    }
+    
+    public static User toEntity(UserDto userDto)
+    {
+        User user = new User();
+        user.setFullName(userDto.getFullName());
+        user.setEmail(userDto.getEmail());
+        return user;
+    }
+
+    public static User toEntity(UserRegistrationDto userDto)
+    {
+        User user = new User();
+        user.setFullName(userDto.getFullName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        return user;
+    }
 }

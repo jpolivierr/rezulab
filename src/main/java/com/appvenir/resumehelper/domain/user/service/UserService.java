@@ -16,12 +16,11 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     public UserDto saveUser(UserRegistrationDto userRegistrationDto){
-        User user = userMapper.toEntity(userRegistrationDto);
+        User user = UserMapper.toEntity(userRegistrationDto);
         User savedUser = userRepository.save(user);
-        return userMapper.toDto(savedUser);
+        return UserMapper.toDto(savedUser);
     }
 
     public User saveUser(User user){

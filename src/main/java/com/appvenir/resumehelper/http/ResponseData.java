@@ -1,9 +1,6 @@
 package com.appvenir.resumehelper.http;
 
 import java.time.LocalDateTime;
-
-import org.springframework.http.HttpStatus;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;

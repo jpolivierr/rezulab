@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appvenir.resumehelper.domain.user.dto.UserDto;
 import com.appvenir.resumehelper.domain.user.dto.UserRegistrationDto;
 import com.appvenir.resumehelper.domain.user.service.UserService;
+import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,10 +23,10 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public UserDto createUser(@RequestBody UserRegistrationDto userRegistrationDto)
+    public ResponseData<UserDto> createUser(@RequestBody UserRegistrationDto userRegistrationDto)
     {
-        System.out.println(userRegistrationDto);
-        return userService.saveUser(userRegistrationDto);
+        var user = userService.saveUser(userRegistrationDto);
+        return ResponseData.set(user);
     }
     
 }
