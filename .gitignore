@@ -34,3 +34,5 @@ build/
 
 .env
 src/main/resources/assets/
+dist
+node_modules
