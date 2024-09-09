@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.resumehelper.domain.experience.dto.ExperienceDto;
 import com.appvenir.resumehelper.domain.experience.service.ExperienceService;
+import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,52 +29,57 @@ public class ExperienceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ExperienceDto addExperience(
+    public ResponseData addExperience(
         @RequestBody ExperienceDto experienceDto,
         @RequestParam("email") String email
         )
     {
-        return experienceService.addExperience(email, experienceDto);
+        var experience = experienceService.addExperience(email, experienceDto);
+        return new ResponseData(experience);
     }
 
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<ExperienceDto> addExperiences(
+    public ResponseData addExperiences(
         @RequestBody List<ExperienceDto> experienceDtos,
         @RequestParam("email") String email
         )
     {
-        return experienceService.addExperiences(email, experienceDtos);
+        var experiences = experienceService.addExperiences(email, experienceDtos);
+        return new ResponseData(experiences);
     }
 
     @GetMapping("/{experienceId}")
     @ResponseStatus(HttpStatus.OK)
-    public ExperienceDto getExperience(
+    public ResponseData getExperience(
         @PathVariable Long experienceId,
         @RequestParam("email") String email
         )
     {
-        return experienceService.getUserExperienceById(email, experienceId);
+        var experience = experienceService.getUserExperienceById(email, experienceId);
+        return new ResponseData(experience);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ExperienceDto> getAllExperiences(
+    public ResponseData getAllExperiences(
         @RequestParam("email") String email
         )
     {
-        return experienceService.getAllUserExperiences(email);
+        var experiences = experienceService.getAllUserExperiences(email);
+        return new ResponseData(experiences);
     }
 
     @PutMapping("/{experienceId}")
     @ResponseStatus(HttpStatus.OK)
-    public ExperienceDto updateExperience(
+    public ResponseData updateExperience(
         @PathVariable Long experienceId,
         @RequestBody ExperienceDto experienceDto,
         @RequestParam("email") String email
         )
     {
-        return experienceService.updateExperience(email, experienceId, experienceDto);
+        var experience = experienceService.updateExperience(email, experienceId, experienceDto);
+        return new ResponseData(experience);
     }
 
     @DeleteMapping("/{experienceId}")

@@ -33,26 +33,28 @@ public class ResumeTemplateController {
         @RequestBody ResumeTemplateDto resumeTemplateDto
     ){
         var resumeTemplate = resumeTemplateService.createResumeTemplate(email, resumeTemplateDto);
-        return ResponseEntity.ok(new ResponseData(resumeTemplate));
+        return ResponseEntity.ok(new ResponseData(HttpStatus.CREATED.value(), resumeTemplate));
     }
 
     @GetMapping("/{resumeTemplateId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResumeTemplateDto getResumeTemplate(
+    public ResponseEntity<?> getResumeTemplate(
         @RequestParam("email") String email,
         @PathVariable("resumeTemplateId") Long resumeTemplateId
     ){
-        return resumeTemplateService.getUserResumeTemplate(email, resumeTemplateId);
+        var resumeTemplate = resumeTemplateService.getUserResumeTemplate(email, resumeTemplateId);
+        return ResponseEntity.ok(new ResponseData(HttpStatus.OK.value(), resumeTemplate));
     }
 
     @PutMapping("/{resumeTemplateId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResumeTemplateDto updateResumeTemplate(
+    public ResponseEntity<?> updateResumeTemplate(
         @RequestParam("email") String email,
         @PathVariable("resumeTemplateId") Long resumeTemplateId,
         @RequestBody ResumeTemplateDto resumeTemplateDto
     ){
-        return resumeTemplateService.updateResumeTemplate(email, resumeTemplateId, resumeTemplateDto);
+        var resumeTemplate = resumeTemplateService.updateResumeTemplate(email, resumeTemplateId, resumeTemplateDto);
+        return ResponseEntity.ok(new ResponseData(HttpStatus.OK.value(), resumeTemplate));
     }
 
     @DeleteMapping("/{resumeTemplateId}")

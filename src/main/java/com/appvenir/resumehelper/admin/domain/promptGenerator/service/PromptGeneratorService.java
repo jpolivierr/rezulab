@@ -27,9 +27,7 @@ public class PromptGeneratorService {
     
     private final UserService userService;
     private final ExperienceRepository experienceRepository;
-    private final ExperienceMapper experienceMapper;
     private final ResumeTemplateRepository resumeTemplateRepository;
-    private final ResumeTemplateMapper resumeTemplateMapper;
     private final PromptRepository promptRepository;
     private final PromptMapper promptMapper;
 
@@ -42,12 +40,12 @@ public class PromptGeneratorService {
         List<ExperienceDto> experiences = experienceRepository
                                         .findByIdInAndUser(promptDetails.getExperienceIds(), user)
                                         .stream().map((e) -> {
-                                            return experienceMapper.toDto(e);
+                                            return ExperienceMapper.toDto(e);
                                         }).toList();
                                         
         ResumeTemplateDto resumeTemplateDto = resumeTemplateRepository
                                         .findByIdAndUserId(promptDetails.getResumeTemplateId(), userId)
-                                        .map(resumeTemplateMapper::toDto)
+                                        .map(ResumeTemplateMapper::toDto)
                                         .orElseThrow(() -> new EntityNotFoundException("Resume Template not found")); 
                                         
         PromptDto promptDto = promptRepository.findByIdAndUserId(promptDetails.getPromptId(), userId)

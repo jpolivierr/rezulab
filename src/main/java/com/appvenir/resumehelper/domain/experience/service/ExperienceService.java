@@ -20,27 +20,26 @@ import lombok.RequiredArgsConstructor;
 public class ExperienceService {
 
     private final UserService userService;
-    private final ExperienceMapper experienceMapper;
     private final ExperienceRepository experienceRepository;
 
     @Transactional
     public ExperienceDto addExperience(String email, ExperienceDto experienceDto)
     {
         User user = userService.findUserByEmail(email);
-        Experience experience = experienceMapper.toEntity(experienceDto);
+        Experience experience = ExperienceMapper.toEntity(experienceDto);
         experience.setUser(user);
         Experience savedExperience = experienceRepository.save(experience);
-        return experienceMapper.toDto(savedExperience);
+        return ExperienceMapper.toDto(savedExperience);
     }
 
     @Transactional
     public List<ExperienceDto> addExperiences(String email, List<ExperienceDto> experienceDtos)
     {
         User user = userService.findUserByEmail(email);
-        List<Experience> experiences = experienceMapper.toEntityListWithUser(user, experienceDtos);
+        List<Experience> experiences = ExperienceMapper.toEntityListWithUser(user, experienceDtos);
 
         List<Experience> savedExperiences = experienceRepository.saveAll(experiences);
-        return experienceMapper.toDtoList(savedExperiences);
+        return ExperienceMapper.toDtoList(savedExperiences);
     }
 
     @Transactional
@@ -48,7 +47,7 @@ public class ExperienceService {
     {
         User user = userService.findUserByEmail(email);
         Experience experience = experienceRepository.findByIdAndUserId(experienceId, user.getId()).orElseThrow(() -> new ExperienceNotFoundException());
-        return experienceMapper.toDto(experience);
+        return ExperienceMapper.toDto(experience);
     }
 
     @Transactional
@@ -56,8 +55,7 @@ public class ExperienceService {
     {
         User user = userService.findUserByEmail(email);
         List<Experience> experiences = experienceRepository.findAllByUserId(user.getId());
-        System.out.println(experiences);
-        return experienceMapper.toDtoList(experiences);
+        return ExperienceMapper.toDtoList(experiences);
     }
 
     @Transactional
@@ -76,7 +74,7 @@ public class ExperienceService {
         experience.setJobDescription(experienceDto.getJobDescription());
         experience.setStartDate(experience.getStartDate());
         experience.setEndDate(experience.getEndDate());
-        return experienceMapper.toDto(experience);
+        return ExperienceMapper.toDto(experience);
     }
 
     @Transactional
