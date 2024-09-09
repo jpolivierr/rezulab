@@ -1,15 +1,12 @@
 package com.appvenir.resumehelper.domain.prompt.mapper;
 
-import org.mapstruct.Mapper;
-
 import com.appvenir.resumehelper.domain.prompt.dto.PromptDto;
 import com.appvenir.resumehelper.domain.prompt.model.Prompt;
 import com.appvenir.resumehelper.domain.user.model.User;
 
-@Mapper(componentModel = "spring")
-public interface PromptMapper {
+public class PromptMapper {
 
-    default Prompt toEntityWithUser(User user, PromptDto promptDto)
+    public static Prompt toEntityWithUser(User user, PromptDto promptDto)
     {
         Prompt prompt = new Prompt();
         prompt.setName(promptDto.getName());
@@ -23,7 +20,7 @@ public interface PromptMapper {
         return prompt;
     }
 
-    default PromptDto toDto(Prompt prompt)
+    public static PromptDto toDto(Prompt prompt)
     {
         PromptDto promptDto = new PromptDto();
         promptDto.setId(prompt.getId());

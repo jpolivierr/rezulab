@@ -29,7 +29,6 @@ public class PromptGeneratorService {
     private final ExperienceRepository experienceRepository;
     private final ResumeTemplateRepository resumeTemplateRepository;
     private final PromptRepository promptRepository;
-    private final PromptMapper promptMapper;
 
     @Transactional
     public String generatePrompt(String email, PromptDetails promptDetails)
@@ -49,7 +48,7 @@ public class PromptGeneratorService {
                                         .orElseThrow(() -> new EntityNotFoundException("Resume Template not found")); 
                                         
         PromptDto promptDto = promptRepository.findByIdAndUserId(promptDetails.getPromptId(), userId)
-                                              .map(promptMapper::toDto)
+                                              .map(PromptMapper::toDto)
                                               .orElseThrow(() -> new EntityNotFoundException("Prompt not found"));  
                                               
         return PromptFactory.getResumeTemplatePrompt(promptDto, experiences, resumeTemplateDto).build();

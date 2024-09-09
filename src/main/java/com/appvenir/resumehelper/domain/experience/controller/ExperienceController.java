@@ -29,57 +29,57 @@ public class ExperienceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseData addExperience(
+    public ResponseData<ExperienceDto> addExperience(
         @RequestBody ExperienceDto experienceDto,
         @RequestParam("email") String email
         )
     {
         var experience = experienceService.addExperience(email, experienceDto);
-        return new ResponseData(experience);
+        return ResponseData.set(experience);
     }
 
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseData addExperiences(
+    public ResponseData<List<ExperienceDto>> addExperiences(
         @RequestBody List<ExperienceDto> experienceDtos,
         @RequestParam("email") String email
         )
     {
         var experiences = experienceService.addExperiences(email, experienceDtos);
-        return new ResponseData(experiences);
+        return ResponseData.set(experiences);
     }
 
     @GetMapping("/{experienceId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseData getExperience(
+    public ResponseData<ExperienceDto> getExperience(
         @PathVariable Long experienceId,
         @RequestParam("email") String email
         )
     {
         var experience = experienceService.getUserExperienceById(email, experienceId);
-        return new ResponseData(experience);
+        return ResponseData.set(experience);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseData getAllExperiences(
+    public ResponseData<List<ExperienceDto>> getAllExperiences(
         @RequestParam("email") String email
         )
     {
         var experiences = experienceService.getAllUserExperiences(email);
-        return new ResponseData(experiences);
+        return ResponseData.set(experiences);
     }
 
     @PutMapping("/{experienceId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseData updateExperience(
+    public ResponseData<ExperienceDto> updateExperience(
         @PathVariable Long experienceId,
         @RequestBody ExperienceDto experienceDto,
         @RequestParam("email") String email
         )
     {
         var experience = experienceService.updateExperience(email, experienceId, experienceDto);
-        return new ResponseData(experience);
+        return ResponseData.set(experience);
     }
 
     @DeleteMapping("/{experienceId}")
