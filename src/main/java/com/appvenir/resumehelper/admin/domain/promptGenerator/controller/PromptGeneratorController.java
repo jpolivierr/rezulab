@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.resumehelper.admin.domain.promptGenerator.model.PromptDetails;
 import com.appvenir.resumehelper.admin.domain.promptGenerator.service.PromptGeneratorService;
+import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,9 +23,10 @@ public class PromptGeneratorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String generatePrompt(@RequestBody PromptDetails promptDetails, @RequestParam("email") String email)
+    public ResponseData<String> generatePrompt(@RequestBody PromptDetails promptDetails, @RequestParam("email") String email)
     {
-        return promptGeneratorService.generatePrompt(email, promptDetails);
+        String finalPrompt = promptGeneratorService.generatePrompt(email, promptDetails);
+        return ResponseData.set(finalPrompt);
     }
     
 }

@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ResumeTemplateService {
      
-    private final ResumeTemplateMapper resumeTemplateMapper;
     private final UserService userService;
     private final ResumeTemplateRepository resumeTemplateRepository;
     
@@ -26,10 +25,10 @@ public class ResumeTemplateService {
     public ResumeTemplateDto createResumeTemplate(String email, ResumeTemplateDto resumeTemplateDto)
     {
         User user = userService.findUserByEmail(email);
-        ResumeTemplate resumeTemplate = resumeTemplateMapper.toEntity(resumeTemplateDto);
+        ResumeTemplate resumeTemplate = ResumeTemplateMapper.toEntity(resumeTemplateDto);
         resumeTemplate.setUser(user);
         ResumeTemplate savedResumeTemplate = resumeTemplateRepository.save(resumeTemplate);
-        return resumeTemplateMapper.toDto(savedResumeTemplate);
+        return ResumeTemplateMapper.toDto(savedResumeTemplate);
     }
 
     @Transactional
@@ -39,7 +38,7 @@ public class ResumeTemplateService {
         ResumeTemplate resumeTemplate = resumeTemplateRepository.findByIdAndUser(resumeTemplateId, user)
                 .orElseThrow(() -> new EntityNotFoundException("Resume Template not found"));
 
-        return resumeTemplateMapper.toDto(resumeTemplate);
+        return ResumeTemplateMapper.toDto(resumeTemplate);
     }
 
     @Transactional
@@ -69,7 +68,7 @@ public class ResumeTemplateService {
         resumeTemplate.setJobDescription(resumeTemplateDto.getJobDescription());
         ResumeTemplate savedResumeTemplate = resumeTemplateRepository.save(resumeTemplate);
         
-        return resumeTemplateMapper.toDto(savedResumeTemplate);
+        return ResumeTemplateMapper.toDto(savedResumeTemplate);
     }
 
     @Transactional

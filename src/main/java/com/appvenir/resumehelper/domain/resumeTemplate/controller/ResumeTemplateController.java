@@ -1,7 +1,6 @@
 package com.appvenir.resumehelper.domain.resumeTemplate.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,31 +27,33 @@ public class ResumeTemplateController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createResumeTemplate(
+    public ResponseData<ResumeTemplateDto> createResumeTemplate(
         @RequestParam("email") String email,
         @RequestBody ResumeTemplateDto resumeTemplateDto
     ){
         var resumeTemplate = resumeTemplateService.createResumeTemplate(email, resumeTemplateDto);
-        return ResponseEntity.ok(new ResponseData(resumeTemplate));
+        return ResponseData.set(resumeTemplate);
     }
 
     @GetMapping("/{resumeTemplateId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResumeTemplateDto getResumeTemplate(
+    public ResponseData<ResumeTemplateDto> getResumeTemplate(
         @RequestParam("email") String email,
         @PathVariable("resumeTemplateId") Long resumeTemplateId
     ){
-        return resumeTemplateService.getUserResumeTemplate(email, resumeTemplateId);
+        var resumeTemplate = resumeTemplateService.getUserResumeTemplate(email, resumeTemplateId);
+        return ResponseData.set(resumeTemplate);
     }
 
     @PutMapping("/{resumeTemplateId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResumeTemplateDto updateResumeTemplate(
+    public ResponseData<ResumeTemplateDto> updateResumeTemplate(
         @RequestParam("email") String email,
         @PathVariable("resumeTemplateId") Long resumeTemplateId,
         @RequestBody ResumeTemplateDto resumeTemplateDto
     ){
-        return resumeTemplateService.updateResumeTemplate(email, resumeTemplateId, resumeTemplateDto);
+        var resumeTemplate = resumeTemplateService.updateResumeTemplate(email, resumeTemplateId, resumeTemplateDto);
+        return ResponseData.set(resumeTemplate);
     }
 
     @DeleteMapping("/{resumeTemplateId}")

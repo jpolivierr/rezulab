@@ -1,27 +1,24 @@
 package com.appvenir.resumehelper.domain.resumeTemplate.mapper;
 
-import org.mapstruct.Mapper;
-
 import com.appvenir.resumehelper.domain.resumeTemplate.dto.ResumeTemplateDto;
 import com.appvenir.resumehelper.domain.resumeTemplate.model.ResumeTemplate;
 
-@Mapper(componentModel = "spring")
-public interface ResumeTemplateMapper {
+public class ResumeTemplateMapper {
 
-    default ResumeTemplateDto toDto (ResumeTemplate resumeTemplate)
+    public static ResumeTemplateDto toDto (ResumeTemplate resumeTemplate)
     {
         var resumeTemplateDto = new ResumeTemplateDto();
         resumeTemplateDto.setId(resumeTemplate.getId());
         resumeTemplateDto.setName(resumeTemplate.getName());
         resumeTemplateDto.setDescription(resumeTemplate.getDescription());
         resumeTemplateDto.setJobDescription(resumeTemplate.getJobDescription());
-        resumeTemplate.setSampleResume(resumeTemplate.getSampleResume());
-        resumeTemplate.setDateCreated(resumeTemplate.getDateCreated());
-        resumeTemplate.setDateCreated(resumeTemplate.getDateCreated());
+        resumeTemplateDto.setSampleResume(resumeTemplate.getSampleResume());
+        resumeTemplateDto.setDateCreated(resumeTemplate.getDateCreated());
+        resumeTemplateDto.setLastUpdated(resumeTemplate.getLastUpdated());
         return resumeTemplateDto;
     }
 
-    default ResumeTemplate toEntity(ResumeTemplateDto resumeTemplateDto)
+    public static ResumeTemplate toEntity(ResumeTemplateDto resumeTemplateDto)
     {
         var resumeTemplate = new ResumeTemplate();
         resumeTemplate.setName(resumeTemplateDto.getName());

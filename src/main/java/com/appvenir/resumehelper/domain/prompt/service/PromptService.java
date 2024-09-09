@@ -20,15 +20,14 @@ public class PromptService {
     
     private final PromptRepository promptRepository;
     private final UserService userService;
-    private final PromptMapper promptMapper;
 
     @Transactional
     public PromptDto createPrompt(String email, PromptDto promptDto)
     {
         User user = userService.findUserByEmail(email);
-        Prompt prompt = promptMapper.toEntityWithUser(user, promptDto);
+        Prompt prompt = PromptMapper.toEntityWithUser(user, promptDto);
         Prompt savedPrompt = promptRepository.save(prompt);
-        return promptMapper.toDto(savedPrompt);
+        return PromptMapper.toDto(savedPrompt);
     }
 
     @Transactional
@@ -37,7 +36,7 @@ public class PromptService {
         User user = userService.findUserByEmail(email);
         Prompt prompt = promptRepository.findByIdAndUserId(promptId, user.getId())
             .orElseThrow(() -> new EntityNotFoundException("Prompt not found"));
-        return promptMapper.toDto(prompt);
+        return PromptMapper.toDto(prompt);
     }
 
     @Transactional
@@ -84,7 +83,7 @@ public class PromptService {
         prompt.setAudience(promptDto.getAudience());
         prompt.setExamples(promptDto.getExamples());
 
-        return promptMapper.toDto(prompt);
+        return PromptMapper.toDto(prompt);
     }
 
     @Transactional

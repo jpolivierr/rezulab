@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appvenir.resumehelper.domain.prompt.dto.PromptDto;
 import com.appvenir.resumehelper.domain.prompt.service.PromptService;
+import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,33 +27,36 @@ public class PromptController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PromptDto createPrompt(
+    public ResponseData<PromptDto> createPrompt(
         @RequestBody PromptDto promptDto,
         @RequestParam("email") String email
         )
     {
-        return promptService.createPrompt(email, promptDto);
+        var prompt = promptService.createPrompt(email, promptDto);
+        return ResponseData.set(prompt);
     }
 
     @GetMapping("/{promptId}")
     @ResponseStatus(HttpStatus.OK)
-    public PromptDto getPrompt(
+    public ResponseData<PromptDto> getPrompt(
         @PathVariable Long promptId,
         @RequestParam("email") String email
         )
     {
-        return promptService.getUserPromptById(email, promptId);
+        var prompt = promptService.getUserPromptById(email, promptId);
+        return ResponseData.set(prompt);
     }
 
     @PutMapping("/{promptId}")
     @ResponseStatus(HttpStatus.OK)
-    public PromptDto updatePrompt(
+    public ResponseData<PromptDto> updatePrompt(
         @PathVariable Long promptId,
         @RequestBody PromptDto promptDto,
         @RequestParam("email") String email
         )
     {
-        return promptService.updatePrompt(email, promptId, promptDto);
+        var prompt = promptService.updatePrompt(email, promptId, promptDto);
+        return ResponseData.set(prompt);
     }
 
     @DeleteMapping("/{promptId}")
