@@ -1,10 +1,9 @@
-package com.appvenir.resumehelper.admin.domain.promptGenerator.service;
+package com.appvenir.resumehelper.domain.promptGenerator.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.appvenir.resumehelper.admin.domain.promptGenerator.model.PromptDetails;
 import com.appvenir.resumehelper.domain.experience.dto.ExperienceDto;
 import com.appvenir.resumehelper.domain.experience.mapper.ExperienceMapper;
 import com.appvenir.resumehelper.domain.experience.repository.ExperienceRepository;
@@ -12,6 +11,7 @@ import com.appvenir.resumehelper.domain.prompt.dto.PromptDto;
 import com.appvenir.resumehelper.domain.prompt.factory.PromptFactory;
 import com.appvenir.resumehelper.domain.prompt.mapper.PromptMapper;
 import com.appvenir.resumehelper.domain.prompt.repository.PromptRepository;
+import com.appvenir.resumehelper.domain.promptGenerator.model.PromptDetails;
 import com.appvenir.resumehelper.domain.resumeTemplate.dto.ResumeTemplateDto;
 import com.appvenir.resumehelper.domain.resumeTemplate.mapper.ResumeTemplateMapper;
 import com.appvenir.resumehelper.domain.resumeTemplate.repository.ResumeTemplateRepository;

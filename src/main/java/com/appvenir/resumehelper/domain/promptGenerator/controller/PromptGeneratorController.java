@@ -1,4 +1,4 @@
-package com.appvenir.resumehelper.admin.domain.promptGenerator.controller;
+package com.appvenir.resumehelper.domain.promptGenerator.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appvenir.resumehelper.admin.domain.promptGenerator.model.PromptDetails;
-import com.appvenir.resumehelper.admin.domain.promptGenerator.service.PromptGeneratorService;
+import com.appvenir.resumehelper.domain.promptGenerator.model.PromptDetails;
+import com.appvenir.resumehelper.domain.promptGenerator.service.PromptGeneratorService;
 import com.appvenir.resumehelper.http.ResponseData;
 
 import lombok.RequiredArgsConstructor;
