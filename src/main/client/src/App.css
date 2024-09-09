@@ -13,14 +13,20 @@
   --shadow: 0px 10px 35px -0px #90bce33d;
   --border-radius: 10px;
   --dark-color: #0e0e0f;
+  --darker-color: #0a0a0b;
   --light-dark-color: #121212;
   --lighter-dark-color: #1a1a1a;
   --main-color: #4614d0;
   --main-color-hover: #4f19e5;
+  --light-text-color: silver;
 }
 
 .theme-dark .bk, .theme-dark.bk{
   background: var(--dark-color);
+}
+
+.theme-dark .dbk, .theme-dark.dbk{
+  background: var(--darker-color);
 }
 
 .theme-dark .lbk, .theme-dark.lbk{
@@ -50,6 +56,10 @@
   color: white;
 }
 
+.theme-dark .item{
+  color: var(--light-text-color);
+}
+
 main{
 min-height: 100vh;
 }
@@ -57,6 +67,13 @@ min-height: 100vh;
 h3 {
   font-weight: 400;
   margin-bottom: 15px;
+}
+
+button{
+  background: inherit;
+  border: none;
+  cursor: pointer;
+  padding: .3rem;
 }
 /* Webkit browsers (Chrome, Safari, and newer versions of Edge) */
 textarea::-webkit-scrollbar {
@@ -89,15 +106,11 @@ textarea:focus {
   outline: none;
 }
 
-.job-requirements textarea{
-  width: 100%;
-  height: 500px;
-}
-
 .layout{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  row-gap: 2rem;
+  column-gap: 2rem;
 }
 
 .layout .c-1{
@@ -127,3 +140,30 @@ textarea:focus {
   justify-content: flex-end;
 }
 
+.text-card textarea{
+  width: 100%;
+  height: 500px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top: none;
+}
+
+.textarea-container{
+  position: relative;
+}
+
+.text-card .textarea-header{
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid var(--);
+  border-bottom: none;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+
+.text-card .textarea-header .item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+}
