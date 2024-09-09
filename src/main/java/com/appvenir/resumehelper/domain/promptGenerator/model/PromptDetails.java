@@ -1,4 +1,4 @@
-package com.appvenir.resumehelper.admin.domain.promptGenerator.model;
+package com.appvenir.resumehelper.domain.promptGenerator.model;
 
 import java.util.List;
 import lombok.Data;
