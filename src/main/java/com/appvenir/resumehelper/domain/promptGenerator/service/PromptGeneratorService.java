@@ -11,6 +11,7 @@ import com.appvenir.resumehelper.domain.prompt.dto.PromptDto;
 import com.appvenir.resumehelper.domain.prompt.factory.PromptFactory;
 import com.appvenir.resumehelper.domain.prompt.mapper.PromptMapper;
 import com.appvenir.resumehelper.domain.prompt.repository.PromptRepository;
+import com.appvenir.resumehelper.domain.promptGenerator.model.PromptAttribute;
 import com.appvenir.resumehelper.domain.promptGenerator.model.PromptDetails;
 import com.appvenir.resumehelper.domain.resumeTemplate.dto.ResumeTemplateDto;
 import com.appvenir.resumehelper.domain.resumeTemplate.mapper.ResumeTemplateMapper;
@@ -48,6 +49,29 @@ public class PromptGeneratorService {
                                         .orElseThrow(() -> new EntityNotFoundException("Resume Template not found")); 
                                         
         PromptDto promptDto = promptRepository.findByIdAndUserId(promptDetails.getPromptId(), userId)
+                                              .map(PromptMapper::toDto)
+                                              .orElseThrow(() -> new EntityNotFoundException("Prompt not found"));  
+                                              
+        return PromptFactory.getResumeTemplatePrompt(promptDto, experiences, resumeTemplateDto).build();
+
+    }
+
+    @Transactional
+    public String generatePromptForJobDescription(String email, PromptAttribute promptAttribute)
+    {
+        var user = userService.findUserByEmail(email);
+        var userId = user.getId();
+
+        List<ExperienceDto> experiences = experienceRepository
+                                        .findByIdInAndUser(promptAttribute.getExperienceIds(), user)
+                                        .stream().map((e) -> {
+                                            return ExperienceMapper.toDto(e);
+                                        }).toList();
+                                        
+        ResumeTemplateDto resumeTemplateDto = new ResumeTemplateDto();
+        resumeTemplateDto.setJobDescription(promptAttribute.getJobDescription());
+                                        
+        PromptDto promptDto = promptRepository.findByIdAndUserId(promptAttribute.getPromptId(), userId)
                                               .map(PromptMapper::toDto)
                                               .orElseThrow(() -> new EntityNotFoundException("Prompt not found"));  
                                               
