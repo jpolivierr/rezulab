@@ -1,42 +1,129 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Inter", system-ui;
+  font-optical-sizing: auto;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root{
+  --shadow: 0px 10px 35px -0px #90bce33d;
+  --border-radius: 10px;
+  --dark-color: #0e0e0f;
+  --light-dark-color: #121212;
+  --lighter-dark-color: #1a1a1a;
+  --main-color: #4614d0;
+  --main-color-hover: #4f19e5;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.theme-dark .bk, .theme-dark.bk{
+  background: var(--dark-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.theme-dark .lbk, .theme-dark.lbk{
+  background: var(--light-dark-color);
 }
 
-.card {
-  padding: 2em;
+.theme-dark .lrbk, .theme-dark.lrbk{
+  background: var(--lighter-dark-color);
 }
 
-.read-the-docs {
-  color: #888;
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark h5
+{
+  color: white;
 }
+
+.theme-dark p
+{
+  color: rgb(237, 237, 237);
+}
+
+.theme-dark textarea
+{
+  color: white;
+}
+
+main{
+min-height: 100vh;
+}
+
+h3 {
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+/* Webkit browsers (Chrome, Safari, and newer versions of Edge) */
+textarea::-webkit-scrollbar {
+  width: 12px; /* Set the width of the scrollbar */
+}
+
+/* Hide the scrollbar track background */
+textarea::-webkit-scrollbar-track {
+  background: transparent; /* Make the track background transparent */
+}
+
+/* Style the scrollbar thumb */
+textarea::-webkit-scrollbar-thumb {
+  background-color: #888; /* You can customize this */
+  border-radius: 10px; /* Optional: round the scrollbar thumb */
+  border: 2px solid transparent; /* Create space around the thumb */
+}
+
+textarea{
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 1rem;
+  scrollbar-width: thin; /* Make the scrollbar thin */
+  scrollbar-color: #888 transparent;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.job-requirements textarea{
+  width: 100%;
+  height: 500px;
+}
+
+.layout{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.layout .c-1{
+  grid-column: 1 / 3;
+}
+
+.button{
+  padding: .9rem 1.1rem;
+  border: none;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.main-btn{
+  background: var(--main-color);
+  color: white;
+  transition: .3s background;
+}
+
+.main-btn:hover{
+  background: var(--main-color-hover);
+}
+
+.prompt-component header{
+  display: flex;
+  justify-content: flex-end;
+}
+

@@ -1,0 +1,37 @@
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.border {
+    border: 1px solid #ffffff0f
+}
+
+.border-radius{
+    border-radius: var(--border-radius);
+}
+
+.display-flex{
+    display: flex;
+}
+
+.gap-1{
+    gap: 1rem;
+}
+
+.padding{
+    padding: 1rem;
+}
+
+.w-1{
+    width: 100%;
+}
+
+.h-1{
+    height: 100%;
+}
+
+.over-flow-hidden{
+    overflow: hidden;
+}
