@@ -9,7 +9,6 @@ import com.appvenir.resumehelper.domain.resumeTemplate.repository.ResumeTemplate
 import com.appvenir.resumehelper.domain.user.model.User;
 import com.appvenir.resumehelper.domain.user.service.UserService;
 
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -56,14 +55,7 @@ public class ResumeTemplateService {
         User user = userService.findUserByEmail(email);
         ResumeTemplate resumeTemplate = resumeTemplateRepository.findByIdAndUser(resumeTemplateId, user)
         .orElseThrow(() -> new EntityNotFoundException("Resume Template not found"));
-
-        if(!resumeTemplate.getName().equals(resumeTemplateDto.getName()))
-        {
-            resumeTemplateRepository.findByNameAndUser(email, user)
-                .ifPresent((r) -> {throw new EntityExistsException("Template name already exists.");});
-        }
-        resumeTemplate.setName(resumeTemplateDto.getName());
-        resumeTemplate.setDescription(resumeTemplateDto.getDescription());
+  
         resumeTemplate.setSampleResume(resumeTemplateDto.getSampleResume());
         resumeTemplate.setJobDescription(resumeTemplateDto.getJobDescription());
         ResumeTemplate savedResumeTemplate = resumeTemplateRepository.save(resumeTemplate);

@@ -18,12 +18,6 @@ import lombok.Setter;
 @Table(name = "resume_template")
 public class ResumeTemplate extends Auditable {
 
-    @Column(name = "name", nullable = false)
-    private String name;
-    
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "sample_resume")
     private String sampleResume;
 
