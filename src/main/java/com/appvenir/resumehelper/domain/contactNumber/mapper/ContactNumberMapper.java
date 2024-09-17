@@ -17,7 +17,6 @@ public class ContactNumberMapper {
     public static ContactNumberDto toDto(ContactNumber contactNumber)
     {
         var contactNumberDto = new ContactNumberDto();
-        contactNumberDto.setId(contactNumber.getId());
         contactNumberDto.setExt(contactNumber.getExt());
         contactNumberDto.setType(contactNumber.getType());
         contactNumberDto.setNumber(contactNumber.getNumber());

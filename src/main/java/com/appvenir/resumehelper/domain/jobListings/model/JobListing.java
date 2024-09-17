@@ -6,7 +6,6 @@ import com.appvenir.resumehelper.domain.common.Auditable;
 import com.appvenir.resumehelper.domain.company.model.Company;
 import com.appvenir.resumehelper.domain.payRange.model.PayRange;
 import com.appvenir.resumehelper.domain.user.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -39,7 +38,6 @@ public class JobListing extends Auditable {
 
     private boolean isUrgent;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

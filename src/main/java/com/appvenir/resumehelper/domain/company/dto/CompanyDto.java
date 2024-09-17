@@ -1,11 +1,13 @@
 package com.appvenir.resumehelper.domain.company.dto;
 
-import com.appvenir.resumehelper.domain.address.model.Address;
+import com.appvenir.resumehelper.domain.address.dto.AddressDto;
 import com.appvenir.resumehelper.domain.contactNumber.dto.ContactNumberDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompanyDto {
 
     private Long id;
@@ -14,7 +16,7 @@ public class CompanyDto {
 
     private String about;
 
-    private Address address;
+    private AddressDto address;
 
     private ContactNumberDto contactNumber;
     

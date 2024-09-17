@@ -7,7 +7,7 @@ import com.appvenir.resumehelper.domain.payRange.mapper.PayRangeMapper;
 
 public class JobListingMapper {
  
-    public JobListingDto toDto(JobListing jobListing)
+    public static JobListingDto toDto(JobListing jobListing)
     {
         var jobListingDto = new JobListingDto();
         jobListingDto.setId(jobListing.getId());
@@ -26,7 +26,7 @@ public class JobListingMapper {
         return jobListingDto;
     }
 
-    public JobListing toDto(JobListingDto jobListingDto)
+    public static JobListing toEntity(JobListingDto jobListingDto)
     {
         var jobListing = new JobListing();
         jobListing.setCompany(CompanyMapper.toEntity(jobListingDto.getCompany()));
