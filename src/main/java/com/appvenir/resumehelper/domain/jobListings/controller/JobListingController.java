@@ -21,7 +21,7 @@ public class JobListingController {
 
     @PostMapping
     public ResponseData<JobListing> createJobListing(
-        @RequestBody JobListing jobListingObject, 
+        @RequestBody JobListing jobListingObject,
         @RequestParam("email") String email)
         {
             var jobListing = jobListingService.createJobListing(email, jobListingObject);

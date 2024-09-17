@@ -31,5 +31,4 @@ public class Company extends Auditable{
     @JoinColumn(name = "contact_number_id", referencedColumnName = "id")
     private ContactNumber contactNumber;
 
-
 }
