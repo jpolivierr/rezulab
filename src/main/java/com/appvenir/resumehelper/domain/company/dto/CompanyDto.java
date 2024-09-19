@@ -1,5 +1,7 @@
 package com.appvenir.resumehelper.domain.company.dto;
 
+import java.util.List;
+
 import com.appvenir.resumehelper.domain.address.dto.AddressDto;
 import com.appvenir.resumehelper.domain.contactNumber.dto.ContactNumberDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,6 +20,6 @@ public class CompanyDto {
 
     private AddressDto address;
 
-    private ContactNumberDto contactNumber;
+    private List<ContactNumberDto> contactNumbers;
     
 }

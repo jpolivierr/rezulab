@@ -8,6 +8,7 @@ import com.appvenir.resumehelper.domain.payRange.model.PayRange;
 import com.appvenir.resumehelper.domain.user.model.User;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
@@ -36,15 +37,16 @@ public class JobListing extends Auditable {
 
     private String source;
 
-    private boolean isUrgent;
+    @Column(name = "is_urgent")
+    private boolean urgent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "jobListing", cascade = CascadeType.ALL, orphanRemoval = true)
     private Company company;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "jobListing", cascade = CascadeType.ALL, orphanRemoval = true)
     private PayRange payRange;
 
 }
