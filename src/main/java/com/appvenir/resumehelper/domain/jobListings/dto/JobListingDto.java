@@ -26,7 +26,7 @@ public class JobListingDto {
 
     private String source;
 
-    private boolean isUrgent;
+    private boolean urgent;
 
     private CompanyDto company;
 
