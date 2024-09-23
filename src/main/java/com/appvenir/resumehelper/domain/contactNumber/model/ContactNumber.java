@@ -1,8 +1,12 @@
 package com.appvenir.resumehelper.domain.contactNumber.model;
 
 import com.appvenir.resumehelper.domain.common.Auditable;
+import com.appvenir.resumehelper.domain.company.model.Company;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,4 +23,7 @@ public class ContactNumber extends Auditable {
 
     private String number;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company company;
 }

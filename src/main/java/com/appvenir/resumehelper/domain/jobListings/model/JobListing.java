@@ -11,6 +11,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -40,13 +41,15 @@ public class JobListing extends Auditable {
     @Column(name = "is_urgent")
     private boolean urgent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
-
-    @OneToOne(mappedBy = "jobListing", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToOne(mappedBy = "jobListing", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pay_range_id")
     private PayRange payRange;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
 }

@@ -1,7 +1,6 @@
 package com.appvenir.resumehelper.domain.address.model;
 
 import com.appvenir.resumehelper.domain.common.Auditable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -24,4 +23,5 @@ public class Address extends Auditable {
 
     @Column(nullable = false)
     private String zipCode;
+
 }

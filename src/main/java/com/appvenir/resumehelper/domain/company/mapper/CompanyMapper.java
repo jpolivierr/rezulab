@@ -1,5 +1,7 @@
 package com.appvenir.resumehelper.domain.company.mapper;
 
+import java.util.stream.Collectors;
+
 import com.appvenir.resumehelper.domain.address.mapper.AddressMapper;
 import com.appvenir.resumehelper.domain.company.dto.CompanyDto;
 import com.appvenir.resumehelper.domain.company.model.Company;
@@ -16,28 +18,22 @@ public class CompanyMapper {
         company.setContactNumbers(companyDto.getContactNumbers()
                                     .stream()
                                     .map(ContactNumberMapper::toEntity)
-                                    .toList()
+                                    .collect(Collectors.toList())
                                     );
         return company;
     }
 
     public static CompanyDto toDto(Company company)
     {
-        System.out.println("==================== ENTITY ======================");
-        System.out.println(company);
-        System.out.println("==================================================");
         var companyDto = new CompanyDto();
         companyDto.setName(company.getName());
         companyDto.setAbout(company.getAbout());
-        companyDto.setAddress(AddressMapper.toDto(company.getAddress()));
+        companyDto.setAddress(AddressMapper.toDto(company.getAddress()));                        
         companyDto.setContactNumbers(company.getContactNumbers()
                                         .stream()
                                         .map(ContactNumberMapper::toDto)
-                                        .toList()
+                                        .collect(Collectors.toList())
                                     );
-        System.out.println("==================== DTO ======================");
-        System.out.println(companyDto);
-        System.out.println("==================================================");
         return companyDto;
     }
 

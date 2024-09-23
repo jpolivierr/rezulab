@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.appvenir.resumehelper.domain.contactNumber.model.ContactNumber;
 import com.appvenir.resumehelper.domain.jobListings.dto.JobListingDto;
 import com.appvenir.resumehelper.domain.jobListings.mapper.JobListingMapper;
 import com.appvenir.resumehelper.domain.jobListings.repository.JobListingRepository;
@@ -24,7 +25,22 @@ public class JobListingService {
     {
         var user = userService.findUserByEmail(email);
         var jobListing = JobListingMapper.toEntity(jobListingDto);
-        jobListing.setUser(user);
+        var company = jobListing.getCompany();
+
+        if(company != null)
+        {
+            user.addCompany(company);
+            company.addJobListing(jobListing);
+            
+            if(company.getContactNumbers() != null && company.getContactNumbers().size() > 0 )
+            {
+                for(ContactNumber contactNumber : company.getContactNumbers()){
+                    contactNumber.setCompany(company);
+                }
+            }
+        }
+
+        user.addJobListing(jobListing);
         var savedJobListing = jobListingRepository.save(jobListing);
         return JobListingMapper.toDto(savedJobListing);
     }
