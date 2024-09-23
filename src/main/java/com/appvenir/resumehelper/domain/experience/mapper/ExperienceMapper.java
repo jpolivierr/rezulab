@@ -1,6 +1,8 @@
 package com.appvenir.resumehelper.domain.experience.mapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.appvenir.resumehelper.domain.experience.dto.ExperienceDto;
 import com.appvenir.resumehelper.domain.experience.model.Experience;
 import com.appvenir.resumehelper.domain.user.model.User;
@@ -45,7 +47,7 @@ public class ExperienceMapper {
             experience.setDateCreated(e.getDateCreated());
             experience.setLastUpdated(e.getLastUpdated());
             return experience;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 
     // List<Experience> toEntityList(List<ExperienceDto> experienceDtos);
@@ -60,6 +62,6 @@ public class ExperienceMapper {
             experience.setEndDate(e.getEndDate());
             experience.setUser(user);
             return experience;
-        }).toList();
+        }).collect(Collectors.toList());
     }
 }

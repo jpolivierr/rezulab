@@ -1,6 +1,7 @@
 package com.appvenir.resumehelper.domain.promptGenerator.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class PromptGeneratorService {
                                         .findByIdInAndUser(promptDetails.getExperienceIds(), user)
                                         .stream().map((e) -> {
                                             return ExperienceMapper.toDto(e);
-                                        }).toList();
+                                        }).collect(Collectors.toList());
                                         
         ResumeTemplateDto resumeTemplateDto = resumeTemplateRepository
                                         .findByIdAndUserId(promptDetails.getResumeTemplateId(), userId)
@@ -66,7 +67,7 @@ public class PromptGeneratorService {
                                         .findByIdInAndUser(promptAttribute.getExperienceIds(), user)
                                         .stream().map((e) -> {
                                             return ExperienceMapper.toDto(e);
-                                        }).toList();
+                                        }).collect(Collectors.toList());;
                                         
         ResumeTemplateDto resumeTemplateDto = new ResumeTemplateDto();
         resumeTemplateDto.setJobDescription(promptAttribute.getJobDescription());

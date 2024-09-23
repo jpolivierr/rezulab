@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS experiences(
 CREATE TABLE IF NOT EXISTS resume_template(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
-    name VARCHAR(250) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     description TEXT NOT NULL,
     sample_resume TEXT,
     job_description TEXT,
@@ -32,25 +32,80 @@ CREATE TABLE IF NOT EXISTS resume_template(
     CONSTRAINT fk_resumeTemplate_userId FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS prompt_details(
-	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS prompt(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
+    name VARCHAR(250) NOT NULL,
     context TEXT NOT NULL,
-    instruction TEXT NULL,
+    instructions TEXT NULL,
     constraints TEXT NULL,
     scope TEXT NULL,
     audience TEXT NULL,
     examples TEXT NULL,
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	CONSTRAINT fk_promptDetails_userId FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_prompt_userId FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS prompt(
+CREATE TABLE IF NOT EXISTS address(
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    prompt_detail_id BIGINT NOT NULL UNIQUE,
-    content TEXT,
+    street VARCHAR(60) NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip_code VARCHAR(50) NOT NULL,
+	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS company (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    address_id BIGINT NULL,
+    name VARCHAR(256) NOT NULL,
+    about TEXT NULL,
     date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	CONSTRAINT fk_prompt_promptDetails FOREIGN KEY(prompt_detail_id) REFERENCES prompt_details(id) ON DELETE CASCADE
+    CONSTRAINT fk_company_address FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE,
+    CONSTRAINT fk_company_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS pay_range (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    min INT DEFAULT 0,
+    max INT DEFAULT 0,
+    period VARCHAR(20) NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS job_listings(
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    company_id BIGINT NOT NULL,
+    pay_range_id BIGINT NULL,
+    user_id BIGINT NOT NULL,
+    job_title VARCHAR(250) NOT NULL,
+    job_description TEXT NOT NULL,
+    job_type VARCHAR(20) NOT NULL DEFAULT "full-time",
+    date_posted TIMESTAMP NULL,
+    work_setting varchar(20) DEFAULT "office",
+    status VARCHAR(20) NULL,
+    source VARCHAR(100) NULL,
+    is_urgent boolean DEFAULT false,
+	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_jobListings_company FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
+    CONSTRAINT fk_jobListings_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_jobListings_payRange FOREIGN KEY (pay_range_id) REFERENCES pay_range(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS contact_number(
+	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    company_id BIGINT NULL,
+    type VARCHAR(20) NULL DEFAULT "mobile",
+    ext VARCHAR(20) NULL,
+    number VARCHAR(30) NULL,
+	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_contactNumber_company FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE
+);
+
