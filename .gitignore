@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
+application-secret.properties
 .env
 src/main/resources/assets/
 dist

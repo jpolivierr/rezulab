@@ -11,14 +11,14 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.appvenir.resumehelper.domain.experience.factory.ExperienceFactory;
-import com.appvenir.resumehelper.domain.experience.mapper.ExperienceMapper;
-import com.appvenir.resumehelper.domain.experience.model.Experience;
-import com.appvenir.resumehelper.domain.experience.repository.ExperienceRepository;
-import com.appvenir.resumehelper.domain.experience.service.ExperienceService;
-import com.appvenir.resumehelper.domain.user.factory.UserFactory;
-import com.appvenir.resumehelper.domain.user.model.User;
-import com.appvenir.resumehelper.domain.user.service.UserService;
+import com.appvenir.rezulab.domain.experience.factory.ExperienceFactory;
+import com.appvenir.rezulab.domain.experience.mapper.ExperienceMapper;
+import com.appvenir.rezulab.domain.experience.model.Experience;
+import com.appvenir.rezulab.domain.experience.repository.ExperienceRepository;
+import com.appvenir.rezulab.domain.experience.service.ExperienceService;
+import com.appvenir.rezulab.domain.user.factory.UserFactory;
+import com.appvenir.rezulab.domain.user.model.User;
+import com.appvenir.rezulab.domain.user.service.UserService;
 
 public class ExperienceServiceTest {
 
