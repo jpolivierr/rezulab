@@ -61,8 +61,6 @@ export default function Prompt() {
 
 
     return (
-        <main className='theme-dark bk'>
-          <div className='container'>
             <div className='prompt-component layout'>
               <header className='padding lrbk border border-radius c-1'>
                 <div className='button-container'>
@@ -99,24 +97,15 @@ export default function Prompt() {
                       <Copy text={promptText}>
                         <button className='item'><i className="fa-regular fa-copy"></i> Copy</button>
                       </Copy>
-                        
-
-                    </div>
-                    
+                    </div>   
                     <textarea 
                     value={promptText} 
                     className='border dbk'
                     onChange={handlepromptTextChange}
                     >
-                        
                   </textarea>
                   </div>
-                  
                 </div>
             </div>
-           
-           
-          </div>
-        </main>
       )
 }
