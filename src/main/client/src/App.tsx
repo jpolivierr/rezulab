@@ -1,5 +1,4 @@
-import './App.css'
-import './assets/css/utils.css'
+import "./assets/css"
 import Prompt from './pages/prompt'
 import MainLayout from './layout/main.ayout'
 import {BrowserRouter, Routes, Route} from "react-router-dom"

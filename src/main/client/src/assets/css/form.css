@@ -1,0 +1,33 @@
+.main-form {
+    max-width: 500px;
+}
+
+.main-form legend{
+    font-size: 22px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+.main-form fieldset{
+    border: none;
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 2rem;
+}
+
+.main-form fieldset section{
+    display: flex;
+    flex-flow: column;
+    margin-bottom: .9rem;
+}
+
+.main-form fieldset section label{
+    margin-bottom: .5rem;
+}
+
+.main-form fieldset section input {
+    border: none;
+    border-radius: 5px;
+    padding: .8rem 1rem;
+    width: 100%;
+    font-size: 16px;
+}

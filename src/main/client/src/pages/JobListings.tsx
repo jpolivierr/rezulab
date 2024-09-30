@@ -1,7 +1,10 @@
-
+import JobListingForm from "../components/forms/jobListing/JobListingForm"
 function JobListings() {
+
   return (
-    <div>JoListings</div>
+    <div>
+        <JobListingForm />
+    </div>
   )
 }
 

@@ -1,0 +1,62 @@
+.theme-dark * {
+    color: white;
+  }
+  
+  .theme-dark .bk, .theme-dark.bk{
+    background: var(--dark-color);
+  }
+  
+  .theme-dark .dbk, .theme-dark.dbk{
+    background: var(--darker-color);
+  }
+  
+  .theme-dark .lbk, .theme-dark.lbk{
+    background: var(--light-dark-color);
+  }
+  
+  .theme-dark .lrbk, .theme-dark.lrbk{
+    background: var(--lighter-dark-color);
+  }
+  
+  .theme-dark h1,
+  .theme-dark h2,
+  .theme-dark h3,
+  .theme-dark h4,
+  .theme-dark h5
+  {
+    color: white;
+  }
+  
+  .theme-dark p
+  {
+    color: rgb(237, 237, 237);
+  }
+  
+  .theme-dark textarea
+  {
+    color: white;
+  }
+  
+  .theme-dark .item{
+    color: var(--light-text-color);
+  }
+  .theme-dark label{
+    color: var(--light-text-color);
+  }
+  .theme-dark input {
+      background: var(--lighter-dark-color);
+      color: white;
+      border: 1px solid var(--border-color) !important;
+  }
+
+  .theme-dark .d-window{
+    background: var(--lighter-dark-color);
+  }
+
+  .theme-dark .d-dropdown button{
+    background: var(--lighter-dark-color);
+  }
+
+  .theme-dark .d-window li:hover{
+    background: var(--light-dark-color);
+}
