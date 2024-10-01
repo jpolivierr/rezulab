@@ -60,3 +60,7 @@
   .theme-dark .d-window li:hover{
     background: var(--light-dark-color);
 }
+
+.theme-dark .select-options button{
+    background: var(--lighter-dark-color);
+}

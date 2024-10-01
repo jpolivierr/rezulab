@@ -11,6 +11,8 @@ export enum JobType {
   }
   
   export enum JobStatus {
+    STARTED = "started",
+    PAUSE = "pause",
     APPLIED = "applied",
     INTERVIEW = "interview",
     OFFER = "offer",

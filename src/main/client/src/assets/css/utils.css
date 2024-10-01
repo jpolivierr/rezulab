@@ -39,3 +39,15 @@
 .over-flow-hidden{
     overflow: hidden;
 }
+
+.invisible{
+    visibility: hidden;
+}
+
+.show{
+    display: inherit !important;
+}
+
+.hide{
+    display: none !important;
+}
