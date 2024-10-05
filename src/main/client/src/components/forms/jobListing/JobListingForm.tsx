@@ -1,77 +1,41 @@
 import { useState } from "react";
-import { JobListing, JobType, WorkSetting, JobStatus } from "../../../types/JobListing";
 import DropDown from "../../dropDown/DropDown";
 import { capFirstLetter } from "../../../utils/TextFormat";
+import JobType from "../../../enums/JobType";
+import WorkSetting from "../../../enums/WorkSetting";
+import JobStatus from "../../../enums/JobStatus";
+import useCompany from "../../../domain/company/hooks/useCompany";
+import useJobListing from "../../../domain/jobListing/hooks/useJobListing";
+import { JOB_SOURCE } from "../../../constants/jobSource";
+import { PHONE_TYPE } from "../../../constants/PhoneType";
+import ValueOptions from "../../valueOptions/ValueOptions";
 
 function JobListingForm() {
 
-      const sourceOption = {
-        Indeed: "Indeed",
-        linkedIn: "LinkedIn",
-        zipRecruiter: "ZipRecruiter",
-        companySite: "Company Site"
-      }
+      const {
+        maxNumCount,
+        company,
+        setName,
+        setAbout, 
+        setNumberExt,
+        setNumber,
+        setNumberType,
+        addContactNumber,
+        removeContactNumber
+      } = useCompany()
 
-      const [jobListing, setJoblisting] = useState<JobListing>({
-        jobTitle: "",
-        jobDescription: "",
-        jobType: JobType.FULL_TIME,
-        datePosted: "",
-        workSetting: WorkSetting.ON_SITE,
-        status: JobStatus.APPLIED,
-        source: sourceOption.linkedIn,
-        urgent: false,
-      })
-
-      const setJobTitle = (jobTitle: string) : void => {
-        setJoblisting((prevState) => ({...prevState, jobTitle}))
-      }
-
-      const setJobDescription = (jobDescription: string) : void => {
-        setJoblisting((prevState) => ({...prevState, jobDescription}))
-      }
-
-      const setJobType = (jobType: JobType) : void => {
-        setJoblisting((prevState) => ({...prevState, jobType}))
-      }
-
-      const setdatePosted = (datePosted: string) : void => {
-        setJoblisting((prevState) => ({...prevState, datePosted}))
-      }
-
-      const setWorkSetting = (workSetting: WorkSetting) : void => {
-        setJoblisting((prevState) => ({...prevState, workSetting}))
-      }
-
-      const setStatus = (status: JobStatus) : void => {
-        setJoblisting((prevState) => ({...prevState, status}))
-      }
-
-      const setSource = (source: string) : void => {
-        setJoblisting((prevState) => ({...prevState, source}))
-      }
-
-      const setUrgent = (urgent: boolean) : void => {
-        setJoblisting((prevState) => ({...prevState, urgent}))
-      }
-
-      const [company, setCompany] = useState<Object>({
-        name: "",
-        about: "",
-        address: {
-          street: "",
-          city: "",
-          state: "",
-          zipCode: "",
-        },
-        contactNumbers: [
-          {
-            type: "mobile",
-            ext: "",
-            number: "",
-          },
-        ],
-      })
+      const {
+        jobListing,
+        setJobTitle,
+        setJobDescription,
+        setJobType,
+        setdatePosted,
+        setWorkSetting,
+        setStatus,
+        setSource,
+        setUrgent 
+      } = useJobListing()
+      
 
       const [payRange, setPayRange] = useState<Object>({
         min: 0,
@@ -79,15 +43,15 @@ function JobListingForm() {
         period: "yearly",
       })
 
-      const [jobTypeDropDown, setJobTypeDropDown] = useState<boolean>(false)
+      const [jobTypeDropDown] = useState<boolean>(false)
 
-      const isSelectedType = (jobType: JobType): boolean => {
-        return jobType === jobListing.jobType
-      }
+    const isSelectedType = (jobType: JobType): boolean => {
+      return jobType === jobListing.jobType
+    }
 
-      const isSelectedWorkSetting= (workSetting: WorkSetting): boolean => {
-        return workSetting === jobListing.workSetting
-      }
+    const isSelectedWorkSetting= (workSetting: WorkSetting): boolean => {
+      return workSetting === jobListing.workSetting
+    }
 
   const submit = (e:any) => {
     e.preventDefault()
@@ -100,13 +64,13 @@ function JobListingForm() {
 
   const next = () => {
     if(formStep.currentStep < formStep.totalStep){
-      setFormStep((prevState) => ({...prevState, currentStep: formStep.currentStep ++}))
+      setFormStep((prevState) => ({...prevState, currentStep: formStep.currentStep + 1}))
     }
   }
 
   const prev = () => {
     if(formStep.currentStep > 1){
-      setFormStep((prevState) => ({...prevState, currentStep: formStep.currentStep --}))
+      setFormStep((prevState) => ({...prevState, currentStep: formStep.currentStep - 1}))
     }
   }
 
@@ -123,7 +87,6 @@ function JobListingForm() {
     if(step === formStep.currentStep){
       return "show"
     }
-
     return "hide"
   }
 
@@ -133,15 +96,58 @@ function JobListingForm() {
             <legend>Company</legend>
             <section>
                 <label>Company Name</label>
-                <input type="text"/>
+                <input type="text"
+                       value={company.name} 
+                       onChange={(e) => setName(e.target.value)}
+                      />
             </section>
             <section>
                 <label>About</label>
                 <textarea 
-                    value={jobListing.jobTitle} 
+                    value={company.about} 
                     className='border lrbk'
-                    // onChange={(e) => setJobTitle(e.target.value)}
+                    onChange={(e) => setAbout(e.target.value)}
                     ></textarea>
+            </section>
+            <section>
+              <label>Contact Numbers</label>
+
+      <ValueOptions 
+            isMax={maxNumCount} 
+            label="Add Number" 
+            buttonStyle="button alt-btn"
+            add={addContactNumber}
+            remove={removeContactNumber}
+            >
+      {
+                  company.contactNumbers.map((numbers, index) => (
+                    <div key={index} className="number-option-block">
+
+                      <DropDown value={jobTypeDropDown} arrow={true} Class="d-dropdown">
+                        <button className="border">Mobile</button>
+                        <ul className="d-window border">
+                          {PHONE_TYPE.map( (type,index) => (
+                            <li key={index} onClick={() => setNumberType(index, type)}>{capFirstLetter(type)}</li>
+                          ))}
+                        </ul>
+                      </DropDown>
+                            
+                      <input type="text" 
+                             placeholder="Phone number" 
+                             onChange={(e) => {setNumber(index, e.target.value)}}/>
+
+                      <div>
+                      <label>Ext.</label>
+                      <input  type="text" 
+                              placeholder="948" 
+                              value={numbers.ext} onChange={(e) =>{setNumberExt(index, e.target.value)}}
+                              />
+                      </div>  
+                      
+                    </div>
+                  ))
+                }
+      </ValueOptions>
             </section>
         </fieldset>
 
@@ -149,22 +155,23 @@ function JobListingForm() {
             <legend>Job Post</legend>
             <section>
                 <label>Job Title</label>
-                <input type="text"
-                       value={jobListing.jobTitle} 
-                       onChange={(e) => setJobTitle(e.target.value)}
+                <input 
+                    type="text"
+                    value={jobListing.jobTitle} 
+                    onChange={(e) => setJobTitle(e.target.value)}
                       />
             </section>
             <section>
                 <label>Job Description</label>
                 <textarea 
-                    value={jobListing.jobTitle} 
+                    value={jobListing.jobDescription} 
                     className='border lrbk'
-                    onChange={(e) => setJobTitle(e.target.value)}
+                    onChange={(e) => setJobDescription(e.target.value)}
                     ></textarea>
             </section>
             <section>
                 <label>Source</label>
-                <DropDown value={jobTypeDropDown} arrow={false} Class="d-dropdown">
+                <DropDown value={false} arrow={false} Class="d-dropdown">
                   <div>
                     <input style={{cursor: "pointer"}} 
                            type="text" 
@@ -173,10 +180,12 @@ function JobListingForm() {
                            />
                   </div>
                   <ul className="d-window border">
-                  <li onClick={() => setSource(sourceOption.Indeed)}>{capFirstLetter(sourceOption.Indeed)}</li>
-                    <li onClick={() => setSource(sourceOption.linkedIn)}>{capFirstLetter(sourceOption.linkedIn)}</li>
-                    <li onClick={() => setSource(sourceOption.zipRecruiter)}>{capFirstLetter(sourceOption.zipRecruiter)}</li>
-                    <li onClick={() => setSource(sourceOption.companySite)}>{capFirstLetter(sourceOption.companySite)}</li>
+                    {
+                      JOB_SOURCE.map( (source, index) => (
+                          <li key={index} onClick={() => setSource(source)}>{capFirstLetter(source)}</li>
+                      ))
+                    }
+                  
                   </ul>
                 </DropDown>
             </section>

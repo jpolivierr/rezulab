@@ -11,7 +11,7 @@
     border: none;
     display: flex;
     flex-flow: column;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .main-form fieldset section{
@@ -34,4 +34,18 @@
 
 .main-form textarea{
     height: 150px;
+}
+
+.number-option-block{
+    display: grid;
+    grid-template-columns: .2fr 1fr max-content;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    row-gap: .5rem;
+    margin-bottom: 1.4rem;
+}
+
+.number-option-block div:nth-child(3){
+    grid-row: 2;
 }

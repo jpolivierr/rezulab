@@ -13,7 +13,7 @@ export default function Prompt() {
     const [requirementText, setRequirementText] = useState<string>("")
 
     const promptDetails: PromptDetails = {
-      experienceIds: [1,2],
+      experienceIds: [2,3],
       promptId: 1,
       jobDescription : ""
     }

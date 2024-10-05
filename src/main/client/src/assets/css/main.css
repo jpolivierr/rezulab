@@ -20,6 +20,8 @@
   --main-color-hover: #4f19e5;
   --light-text-color: silver;
   --border-color: #ffffff0f;
+
+  --error-color: rgb(244, 84, 84);
 }
 
 main{
@@ -34,6 +36,11 @@ h3 {
 li{
     list-style: none;
     cursor: pointer;
+}
+
+label{
+  margin-bottom: .5rem;
+  display: block;
 }
 
 button{
@@ -91,6 +98,7 @@ textarea:focus {
   border-radius: 100px;
   font-weight: 600;
   cursor: pointer;
+  width: max-content;
 }
 
 .main-btn{
@@ -101,6 +109,12 @@ textarea:focus {
 
 .main-btn:hover{
   background: var(--main-color-hover);
+}
+
+.alt-btn{
+  border: 2px solid var(--main-color);
+  color: white;
+  transition: .3s background;
 }
 
 .prompt-component header{
@@ -197,6 +211,7 @@ textarea:focus {
     display: flex;
     justify-content: space-between;
     min-width: 131px;
+    width: 100%;
 }
 
 .d-window {
@@ -232,6 +247,27 @@ textarea:focus {
 
 .selected-option{
     background: var(--main-color) !important;
+}
+
+.icon{
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: background .3s;
+}
+
+.icon:hover{
+  background: rgba(251, 249, 254, 0.065);
+}
+
+
+
+.delete-icon{
+  color: var(--error-color) !important;
 }
 
 

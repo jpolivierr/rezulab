@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class ResumeTemplateDto {
     private Long id;
+    private String name;
     private String sampleResume;
     private String jobDescription;
     private LocalDateTime dateCreated;
