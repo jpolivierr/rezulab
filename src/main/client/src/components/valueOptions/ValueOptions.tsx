@@ -6,6 +6,7 @@ type ValueOptions = {
     isMax: boolean;
     label: string;
     buttonStyle: string;
+    removeIcon: boolean;
     add: () => void;
     remove: (index: number) => void;
 }
@@ -15,6 +16,7 @@ export default function ValueOptions ({
                                 isMax,
                                 label,
                                 buttonStyle,
+                                removeIcon,
                                 add,
                                 remove
                             } : ValueOptions
@@ -30,7 +32,10 @@ export default function ValueOptions ({
                             children: (
                                 <>
                                     {child.props.children}
-                                    <i onClick={() => remove(index)} className="fa-solid fa-trash-can icon delete-icon"></i>
+                                    {
+                                        removeIcon &&
+                                        <i onClick={() => remove(index)} className="fa-solid fa-trash-can icon delete-icon"></i>
+                                    }
                                 </>
                             )
                         })

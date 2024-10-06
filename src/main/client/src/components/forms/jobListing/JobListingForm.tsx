@@ -21,7 +21,16 @@ function JobListingForm() {
         setNumber,
         setNumberType,
         addContactNumber,
-        removeContactNumber
+        removeContactNumber,
+        setStreet,
+        getStreet,
+        setCity,
+        getCity,
+        setState,
+        getState,
+        setZipCode,
+        getZipCode,
+        removeAddress
       } = useCompany()
 
       const {
@@ -62,6 +71,19 @@ function JobListingForm() {
     totalStep: 2
   })
 
+  const [showAddress, setShowAddress] = useState(false)
+
+  const toggleAddress = () => {
+
+    if(showAddress){
+      removeAddress()
+      setShowAddress(false)
+    }else {
+      setShowAddress(true)
+    }
+
+  }
+
   const next = () => {
     if(formStep.currentStep < formStep.totalStep){
       setFormStep((prevState) => ({...prevState, currentStep: formStep.currentStep + 1}))
@@ -90,6 +112,8 @@ function JobListingForm() {
     return "hide"
   }
 
+  console.log(company)
+
   return (
     <form className="main-form" onSubmit={submit}>
         <fieldset className={`${showCurrentStep(1)}`}>
@@ -109,46 +133,80 @@ function JobListingForm() {
                     onChange={(e) => setAbout(e.target.value)}
                     ></textarea>
             </section>
-            <section>
-              <label>Contact Numbers</label>
+          <section>
+            <label>Contact Numbers</label>
+            <ValueOptions 
+                  isMax={maxNumCount} 
+                  label="Add Number" 
+                  buttonStyle="button alt-btn"
+                  removeIcon={true}
+                  add={addContactNumber}
+                  remove={removeContactNumber}
+                  >
+                  {
+                        company.contactNumbers.map((numbers, index) => (
+                          <div key={index} className="number-option-block">
 
-      <ValueOptions 
-            isMax={maxNumCount} 
-            label="Add Number" 
-            buttonStyle="button alt-btn"
-            add={addContactNumber}
-            remove={removeContactNumber}
-            >
-      {
-                  company.contactNumbers.map((numbers, index) => (
-                    <div key={index} className="number-option-block">
+                            <DropDown value={jobTypeDropDown} arrow={true} Class="d-dropdown">
+                              <button className="border">Mobile</button>
+                              <ul className="d-window border">
+                                {PHONE_TYPE.map( (type,index) => (
+                                  <li key={index} onClick={() => setNumberType(index, type)}>{capFirstLetter(type)}</li>
+                                ))}
+                              </ul>
+                            </DropDown>
+                                  
+                            <input type="text" 
+                                  placeholder="Phone number" 
+                                  onChange={(e) => {setNumber(index, e.target.value)}}/>
 
-                      <DropDown value={jobTypeDropDown} arrow={true} Class="d-dropdown">
-                        <button className="border">Mobile</button>
-                        <ul className="d-window border">
-                          {PHONE_TYPE.map( (type,index) => (
-                            <li key={index} onClick={() => setNumberType(index, type)}>{capFirstLetter(type)}</li>
-                          ))}
-                        </ul>
-                      </DropDown>
+                            <div>
+                            <label>Ext.</label>
+                            <input  type="text" 
+                                    placeholder="948" 
+                                    value={numbers.ext} onChange={(e) =>{setNumberExt(index, e.target.value)}}
+                                    />
+                            </div>  
                             
-                      <input type="text" 
-                             placeholder="Phone number" 
-                             onChange={(e) => {setNumber(index, e.target.value)}}/>
-
-                      <div>
-                      <label>Ext.</label>
-                      <input  type="text" 
-                              placeholder="948" 
-                              value={numbers.ext} onChange={(e) =>{setNumberExt(index, e.target.value)}}
-                              />
-                      </div>  
-                      
+                          </div>
+                        ))
+                      }
+            </ValueOptions>
+          </section>
+          <section>
+            <label>Location</label>
+            <ValueOptions 
+                  isMax={showAddress} 
+                  label="Add Location" 
+                  buttonStyle="button alt-btn"
+                  removeIcon={true}
+                  add={toggleAddress}
+                  remove={toggleAddress}
+                  >
+                  {
+                  showAddress && 
+                  <div>
+                    <div>
+                      <label>Street</label>
+                      <input type="text" value={getStreet()} onChange={(e) => setStreet(e.target.value)}/>
                     </div>
-                  ))
-                }
-      </ValueOptions>
-            </section>
+                    <div>
+                      <label>city</label>
+                      <input type="text" value={getCity()} onChange={(e) => setCity(e.target.value)}/>
+                    </div>
+                    <div>
+                      <label>State</label>
+                      <input type="text" value={getState()} onChange={(e) => setState(e.target.value)}/>
+                    </div>
+                    <div>
+                      <label>Zipcode</label>
+                      <input type="text" value={getZipCode()} onChange={(e) => setZipCode(e.target.value)}/>
+                    </div>
+                  </div>
+                  }  
+                  
+            </ValueOptions>
+          </section>
         </fieldset>
 
         <fieldset className={`${showCurrentStep(2)}`}>

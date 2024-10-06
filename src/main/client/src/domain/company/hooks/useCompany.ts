@@ -16,6 +16,11 @@ export default function useCompany() {
         contactNumbers: [],
       })
 
+      const getStreet = () => company.address.street;
+      const getCity = () => company.address.city;
+      const getState = () => company.address.state;
+      const getZipCode = () => company.address.zipCode;
+
       const MAX_NUM_COUNT = 4
       const [maxNumCount, setMaxNumCount] = useState<boolean>(false)
 
@@ -100,6 +105,46 @@ export default function useCompany() {
         });
       };
 
+      const setStreet = (street: string): void => {
+        setCompany((prevState) => ({
+            ...prevState,
+            address: {...prevState.address, street}
+        }))
+      }  
+
+      const setCity = (city: string): void => {
+        setCompany((prevState) => ({
+            ...prevState,
+            address: {...prevState.address, city}
+        }))
+      }  
+
+      const setState = (state: string): void => {
+        setCompany((prevState) => ({
+            ...prevState,
+            address: {...prevState.address, state}
+        }))
+      }
+
+      const setZipCode = (zipCode: string): void => {
+        setCompany((prevState) => ({
+            ...prevState,
+            address: {...prevState.address, zipCode}
+        }))
+      }
+
+      const removeAddress = () => {
+        setCompany((prevState) => ({
+          ...prevState,
+          address: {...prevState.address, 
+                    street: "",
+                    city: "",
+                    state: "",
+                    zipCode: ""
+          }
+      }))
+      }
+
    return {
     maxNumCount,
     company,
@@ -109,6 +154,15 @@ export default function useCompany() {
     removeContactNumber,
     setNumberType,
     setNumberExt,
-    setNumber
+    setNumber,
+    setStreet,
+    getStreet,
+    setCity,
+    getCity,
+    setState,
+    getState,
+    setZipCode,
+    getZipCode,
+    removeAddress
    }
 }
